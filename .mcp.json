@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "swot": { "command": "swot", "args": ["mcp"] }
+  }
+}

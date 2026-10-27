@@ -1,0 +1,5 @@
+{
+  "name": "swot",
+  "owner": { "name": "Swot" },
+  "plugins": [{ "name": "swot", "source": "./", "description": "Study app on your own Claude subscription: notes, flashcards, quizzes and a tutor from PDFs, YouTube and text." }]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "swot-study",
+  "version": "0.1.0",
+  "description": "Learn anything as an interactive course: lessons, notes, quizzes, flashcards and a podcast from a topic, PDF (even scanned), YouTube video, website or lecture recording. Runs on your own Claude Code or Codex subscription.",
+  "type": "module",
+  "bin": {
+    "swot-study": "bin/swot.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "web",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json"
+  ],
+  "scripts": {
+    "start": "node bin/swot.js",
+    "mcp": "node bin/swot.js mcp",
+    "test": "node test.mjs",
+    "prepublishOnly": "node test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@mozilla/readability": "^0.6.0",
+    "linkedom": "^0.18.14",
+    "unpdf": "^1.0.0",
+    "zod": "^3.25.0"
+  },
+  "keywords": [
+    "study",
+    "learning",
+    "flashcards",
+    "quiz",
+    "claude-code",
+    "codex",
+    "mcp",
+    "education"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samurai007AK/swot.git"
+  },
+  "homepage": "https://github.com/Samurai007AK/swot#readme",
+  "bugs": "https://github.com/Samurai007AK/swot/issues",
+  "author": "Samurai007AK",
+  "license": "MIT"
+}
