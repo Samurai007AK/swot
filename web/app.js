@@ -309,8 +309,10 @@ async function drawLessons() {
   if (!list) return;
   let sets;
   try { sets = await api('/sets'); } catch (e) {
-    document.getElementById('lessons').innerHTML = `<p class="empty error" role="alert">Could not load your lessons: ${esc(e.message)}</p>`; return;
+    if (list.isConnected) list.innerHTML = `<p class="empty error" role="alert">Could not load your lessons: ${esc(e.message)}</p>`;
+    return;
   }
+  if (!list.isConnected) return; // the learner opened a course while the list was loading
   if (!sets.length) { list.innerHTML = '<p class="empty">Courses you start will be listed here.</p>'; return; }
   const pctOf = (s) => (s.chapters ? Math.round((s.done / s.chapters) * 100) : 0);
   list.innerHTML = sets.map((s) => `<a class="lesson card" href="#/set/${s.id}/learn">
@@ -320,12 +322,13 @@ async function drawLessons() {
       ${s.status === 'processing' ? '<span class="ring ring--spin" aria-label="Generating"></span>' : `<span class="ring" style="--p:${pctOf(s)}" aria-label="${pctOf(s)}% complete"><span>${pctOf(s)}</span></span>`}
     </a>`).join('');
   const last = sets.find((s) => s.status === 'ready' && s.done < s.chapters);
+  const jump = document.getElementById('jump');
   if (last) {
-    document.getElementById('jump').innerHTML = `<a class="jump card" href="#/learn/${last.id}/${last.current}">
+    jump.innerHTML = `<a class="jump card" href="#/learn/${last.id}/${last.current}">
       <span class="ring ring--sm" style="--p:${pctOf(last)}" aria-hidden="true"></span>
       <span class="jump__t">${esc(last.title)}</span><span class="jump__ch">Ch. ${last.current + 1}</span><span class="jump__go">Keep going →</span></a>`;
   } else {
-    document.getElementById('jump').innerHTML = '';
+    jump.innerHTML = '';
   }
   if (sets.some((s) => s.status === 'processing')) later(drawLessons, 3000);
 }
